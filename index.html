@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aloha Ukulele Tab Builder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__text">
+      <p class="eyebrow">Aloha Tabs</p>
+      <h1>Ukulele 打譜小幫手</h1>
+      <p class="subtitle">線上建立、編輯並匯出四弦 Ukulele 的指板譜。適合練習、教學與快速記錄靈感。</p>
+      <div class="hero__actions">
+        <button class="btn btn-primary" id="addMeasure">新增小節</button>
+        <button class="btn" id="exportTab">匯出文字譜</button>
+        <button class="btn btn-ghost" id="clearSong">清空專案</button>
+      </div>
+    </div>
+    <div class="hero__card">
+      <h3>專案設定</h3>
+      <div class="form-grid">
+        <label>
+          標題
+          <input type="text" id="titleInput" placeholder="My Ukulele Idea" />
+        </label>
+        <label>
+          速度 (BPM)
+          <input type="number" id="tempoInput" min="40" max="220" step="1" value="90" />
+        </label>
+        <label>
+          拍號
+          <select id="timeSignature">
+            <option value="4/4">4 / 4</option>
+            <option value="3/4">3 / 4</option>
+            <option value="2/4">2 / 4</option>
+            <option value="6/8">6 / 8</option>
+          </select>
+        </label>
+        <label>
+          切分
+          <select id="resolution">
+            <option value="1">四分</option>
+            <option value="2" selected>八分</option>
+            <option value="4">十六分</option>
+          </select>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel">
+      <div class="panel__header">
+        <div>
+          <p class="eyebrow">樂曲資訊</p>
+          <h2 id="songTitle">新作品</h2>
+          <p class="meta" id="songMeta">Tempo 90 · 4/4 · 八分切分</p>
+        </div>
+        <div class="tag">Ukulele · G C E A</div>
+      </div>
+      <div class="legend">
+        <span class="legend__item"><span class="pill pill--accent"></span>點擊可直接輸入品位數字</span>
+        <span class="legend__item"><span class="pill pill--chord"></span>上方可輸入和弦名稱</span>
+        <span class="legend__item">雙擊小節名稱可重新命名</span>
+      </div>
+      <div id="tabContainer" class="tab-container"></div>
+    </section>
+
+    <aside class="panel side-panel">
+      <h3>小技巧</h3>
+      <ul class="tips">
+        <li>按一下格子輸入數字，空白代表空弦「0」，輸入 &quot;-&quot; 刪除。</li>
+        <li>上方和弦列可以快速記下節奏伴奏或右手指法。</li>
+        <li>切換拍號或切分時，現有小節會自動補齊新的格數。</li>
+        <li>匯出文字譜後可直接貼到訊息或筆記中，方便分享。</li>
+      </ul>
+
+      <h3>匯出結果</h3>
+      <textarea id="exportPreview" readonly placeholder="按下『匯出文字譜』即可在這裡看到內容"></textarea>
+    </aside>
+  </main>
+
+  <template id="measureTemplate">
+    <div class="measure">
+      <div class="measure__header">
+        <input class="measure__title" aria-label="小節名稱" />
+        <button class="icon-btn" data-action="duplicate" title="複製小節">⧉</button>
+        <button class="icon-btn" data-action="delete" title="刪除小節">✕</button>
+      </div>
+      <div class="chord-row" aria-label="和弦列"></div>
+      <div class="strings">
+        <div class="string" data-string="G"></div>
+        <div class="string" data-string="C"></div>
+        <div class="string" data-string="E"></div>
+        <div class="string" data-string="A"></div>
+      </div>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
